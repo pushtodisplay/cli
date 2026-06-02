@@ -2,6 +2,10 @@
 
 Command-line interface and [MCP server](https://modelcontextprotocol.io) for [Push To Display](https://pushtodisplay.com) — send real-time updates to display boards from your terminal or AI agents.
 
+<p align="center">
+  <img src="assets/display-4-panel-status.png" alt="Push to Display — 4-panel regional status board" width="600" />
+</p>
+
 ## Install
 
 Run directly with `npx` (no install needed):
@@ -168,12 +172,12 @@ pushtodisplay send -b my-board "test" --json
 
 Configuration is resolved in order: environment variables → config file → defaults.
 
-| Env var           | Description        | Default                              |
-| ----------------- | ------------------ | ------------------------------------ |
-| `PTD_API_URL`     | API endpoint       | `https://api.pushtodisplay.com`      |
-| `PTD_SERVICE_URL` | Service endpoint   | `https://services.pushtodisplay.com` |
-| `PTD_IDP_URL`     | Identity provider  | `https://idp.pushtodisplay.com`      |
-| `PTD_CONFIG_DIR`  | Config directory   | `~/.config/pushtodisplay`            |
+| Env var           | Description       | Default                              |
+| ----------------- | ----------------- | ------------------------------------ |
+| `PTD_API_URL`     | API endpoint      | `https://api.pushtodisplay.com`      |
+| `PTD_SERVICE_URL` | Service endpoint  | `https://services.pushtodisplay.com` |
+| `PTD_IDP_URL`     | Identity provider | `https://idp.pushtodisplay.com`      |
+| `PTD_CONFIG_DIR`  | Config directory  | `~/.config/pushtodisplay`            |
 
 ## MCP server
 
@@ -285,6 +289,23 @@ pushtodisplay auth login --api-key pt_your_key_here
 ```
 
 > **Note:** API key auth only supports the `send` command. Use `auth login` for full access to boards, devices, and config management.
+
+## Screenshots
+
+<p align="center">
+  <img src="assets/display-4-panel-status.png" alt="4-panel layout — regional status board" width="600" /><br />
+  <em>4-panel layout — regional status at a glance</em>
+</p>
+
+<p align="center">
+  <img src="assets/display-2-panel-logs.png" alt="2-panel layout with CI/CD logs" width="600" /><br />
+  <em>Multi-panel with CI/CD pipeline and infrastructure logs</em>
+</p>
+
+<p align="center">
+  <img src="assets/display-incident-timeline.png" alt="Incident timeline display" width="600" /><br />
+  <em>Incident timeline with color-coded severity</em>
+</p>
 
 ## License
 
