@@ -2,9 +2,7 @@
 
 Command-line interface and [MCP server](https://modelcontextprotocol.io) for [Push To Display](https://pushtodisplay.com) — send real-time updates to display boards from your terminal or AI agents.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/pushtodisplay/cli/main/assets/display-4-panel-status.png" alt="Push to Display — 4-panel regional status board" width="600" />
-</p>
+![Push to Display — 4-panel regional status board](https://raw.githubusercontent.com/pushtodisplay/cli/main/assets/display-4-panel-status.png)
 
 ## Install
 
@@ -292,20 +290,14 @@ pushtodisplay auth login --api-key pt_your_key_here
 
 ## Screenshots
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/pushtodisplay/cli/main/assets/display-4-panel-status.png" alt="4-panel layout — regional status board" width="600" /><br />
-  <em>4-panel layout — regional status at a glance</em>
-</p>
+![4-panel layout — regional status board](https://raw.githubusercontent.com/pushtodisplay/cli/main/assets/display-4-panel-status.png)
+_4-panel layout — regional status at a glance_
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/pushtodisplay/cli/main/assets/display-2-panel-logs.png" alt="2-panel layout with CI/CD logs" width="600" /><br />
-  <em>Multi-panel with CI/CD pipeline and infrastructure logs</em>
-</p>
+![2-panel layout with CI/CD logs](https://raw.githubusercontent.com/pushtodisplay/cli/main/assets/display-2-panel-logs.png)
+_Multi-panel with CI/CD pipeline and infrastructure logs_
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/pushtodisplay/cli/main/assets/display-incident-timeline.png" alt="Incident timeline display" width="600" /><br />
-  <em>Incident timeline with color-coded severity</em>
-</p>
+![Incident timeline display](https://raw.githubusercontent.com/pushtodisplay/cli/main/assets/display-incident-timeline.png)
+_Incident timeline with color-coded severity_
 
 ## License
 
