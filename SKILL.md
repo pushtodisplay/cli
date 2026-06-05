@@ -7,6 +7,16 @@ description: "Send real-time display updates to boards, manage boards, and query
 
 Send real-time content to display boards from the terminal or AI agents. Boards show styled text blocks on connected devices — phones, tablets, TVs, or any screen running the PushToDisplay app.
 
+Install from npm — run directly with `npx` or install globally:
+
+```bash
+npx pushtodisplay --help
+# or
+npm install -g pushtodisplay
+```
+
+Requires Node.js 18+.
+
 **Two interfaces, same capabilities:**
 
 - **CLI** — `pushtodisplay <command>` in any terminal. Every agent can shell out.
