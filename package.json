@@ -1,6 +1,6 @@
 {
   "name": "pushtodisplay",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "PushToDisplay CLI and MCP server — send real-time updates to display boards from your terminal or AI agents",
   "type": "module",
   "bin": {
