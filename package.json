@@ -42,7 +42,7 @@
   "dependencies": {},
   "devDependencies": {
     "@eslint/js": "^9.39.4",
-    "@modelcontextprotocol/sdk": "^1.12.1",
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.15.3",
     "commander": "^13.1.0",

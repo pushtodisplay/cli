@@ -18,7 +18,7 @@ Or install globally:
 npm install -g pushtodisplay
 ```
 
-Requires Node.js 18+.
+Requires Node.js 18+. For full product documentation, visit [pushtodisplay.com/docs](https://pushtodisplay.com/docs).
 
 ## Quick start
 
