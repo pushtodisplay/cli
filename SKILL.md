@@ -15,7 +15,7 @@ npx pushtodisplay --help
 npm install -g pushtodisplay
 ```
 
-Requires Node.js 18+.
+Requires Node.js 18+. See the [PushToDisplay documentation](https://pushtodisplay.com/docs) for guides, use cases, and API details.
 
 **Two interfaces, same capabilities:**
 
