@@ -1,6 +1,6 @@
 {
   "name": "pushtodisplay",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "PushToDisplay CLI and MCP server — send real-time updates to display boards from your terminal or AI agents",
   "mcpName": "io.github.pushtodisplay/cli",
   "license": "MIT",
