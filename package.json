@@ -1,7 +1,9 @@
 {
   "name": "pushtodisplay",
-  "version": "0.1.12",
+  "version": "0.1.9",
   "description": "PushToDisplay CLI and MCP server — send real-time updates to display boards from your terminal or AI agents",
+  "mcpName": "pushtodisplay",
+  "license": "MIT",
   "type": "module",
   "bin": {
     "pushtodisplay": "./dist/cli.js"
