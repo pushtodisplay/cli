@@ -1,5 +1,6 @@
 # pushtodisplay
 
+[![SafeSkill 95/100](https://img.shields.io/badge/SafeSkill-95%2F100_Verified%20Safe-brightgreen)](https://safeskill.dev/scan/pushtodisplay-cli)
 Command-line interface and [MCP server](https://modelcontextprotocol.io) for [Push To Display](https://pushtodisplay.com) — send real-time updates to display boards from your terminal or AI agents.
 
 ![Push to Display — 4-panel regional status board](https://raw.githubusercontent.com/pushtodisplay/cli/main/assets/display-4-panel-status.png)
