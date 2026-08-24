@@ -1,0 +1,12 @@
+pkgbase = pushtodisplay
+	pkgdesc = CLI and MCP server for Push To Display - send real-time updates to display boards from your terminal
+	pkgver = 0.1.14
+	pkgrel = 1
+	url = https://pushtodisplay.com
+	arch = any
+	license = MIT
+	depends = nodejs
+	source = pushtodisplay-0.1.14.tar.gz::https://github.com/pushtodisplay/cli/archive/refs/tags/cli-v0.1.14.tar.gz
+	sha256sums = 80bc78246a1da1e37a845820e593f4b1a7c605d69cdc4610fd0ae734d17f7931
+
+pkgname = pushtodisplay

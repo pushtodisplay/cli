@@ -63,7 +63,7 @@ program
 
 const isJson = () => jsonOutput;
 
-program.addCommand(createAuthCommand(authManager, config));
+program.addCommand(createAuthCommand(authManager, config, isJson));
 program.addCommand(createSendCommand(client, isJson));
 program.addCommand(createBoardsCommand(client, isJson));
 program.addCommand(createDevicesCommand(client, isJson));
