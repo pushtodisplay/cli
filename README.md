@@ -73,8 +73,9 @@ pushtodisplay auth logout
 
 `auth status` reports **effective** auth: an expired access token is still
 reported as authenticated when a valid refresh token can renew it transparently
-(shown as `Access token: expired (will refresh automatically)`). It exits `0`
-when authenticated and `1` when not, so it is safe to gate scripts on it.
+(a `will refresh automatically` note is shown instead of the raw token expiry).
+It exits `0` when authenticated and `1` when not, so it is safe to gate
+scripts on it.
 
 ```json
 {
@@ -82,7 +83,6 @@ when authenticated and `1` when not, so it is safe to gate scripts on it.
   "method": "oauth",
   "accessTokenExpired": true,
   "canRefresh": true,
-  "accessTokenExpiresAt": "2026-01-01T00:00:00.000Z",
   "sessionExpiresAt": "2026-06-01T00:00:00.000Z"
 }
 ```

@@ -1,12 +1,12 @@
 {
   "name": "pushtodisplay",
-  "version": "0.1.2",
+  "version": "0.1.14",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
       "name": "pushtodisplay",
-      "version": "0.1.2",
+      "version": "0.1.14",
       "license": "MIT",
       "bin": {
         "pushtodisplay": "dist/cli.js"

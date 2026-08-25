@@ -110,7 +110,11 @@ describe("auth status", () => {
     try {
       await h.run(["status"]);
       expect(h.output()).toContain("Authenticated: Yes");
+      expect(h.output()).toContain("Session expires");
       expect(h.output()).toContain("All commands available");
+      // No access-token expiry info in human output (session expiry only).
+      expect(h.output()).not.toContain("Access token expires");
+      expect(h.output()).not.toContain("expired");
       expect(process.exitCode).toBe(0);
     } finally {
       h.restore();
@@ -130,8 +134,10 @@ describe("auth status", () => {
     try {
       await h.run(["status"]);
       expect(h.output()).toContain("Authenticated: Yes");
-      expect(h.output()).toContain("Access token: expired (will refresh automatically)");
+      expect(h.output()).toContain("will refresh automatically");
       expect(h.output()).toContain("All commands available");
+      // No access-token expiry timestamp in human output.
+      expect(h.output()).not.toContain("Access token expires");
       expect(process.exitCode).toBe(0);
     } finally {
       h.restore();
@@ -194,8 +200,9 @@ describe("auth status", () => {
       expect(parsed.method).toBe("oauth");
       expect(parsed.accessTokenExpired).toBe(true);
       expect(parsed.canRefresh).toBe(true);
-      expect(parsed.accessTokenExpiresAt).toBeDefined();
       expect(parsed.sessionExpiresAt).toBeDefined();
+      // No access-token expiry timestamp in JSON (diagnostic flag only).
+      expect(parsed.accessTokenExpiresAt).toBeUndefined();
       expect(process.exitCode).toBe(0);
     } finally {
       h.restore();

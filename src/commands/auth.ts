@@ -105,7 +105,6 @@ export function createAuthCommand(
                 method,
                 accessTokenExpired: false,
                 canRefresh: false,
-                accessTokenExpiresAt: null,
                 sessionExpiresAt: null,
               },
               null,
@@ -135,7 +134,6 @@ export function createAuthCommand(
                 method: "api-key",
                 accessTokenExpired: false,
                 canRefresh: false,
-                accessTokenExpiresAt: null,
                 sessionExpiresAt: null,
               },
               null,
@@ -163,9 +161,6 @@ export function createAuthCommand(
         now > creds.refreshTokenExpiresAt;
       const canRefresh = !!creds.refreshToken && !refreshTokenExpired;
       const authenticated = !accessTokenExpired || canRefresh;
-      const accessTokenExpiresAt = creds.expiresAt
-        ? new Date(creds.expiresAt * 1000).toISOString()
-        : null;
       const sessionExpiresAt = creds.refreshTokenExpiresAt
         ? new Date(creds.refreshTokenExpiresAt * 1000).toISOString()
         : null;
@@ -182,7 +177,6 @@ export function createAuthCommand(
               method: "oauth",
               accessTokenExpired,
               canRefresh,
-              accessTokenExpiresAt,
               sessionExpiresAt,
             },
             null,
@@ -202,9 +196,7 @@ export function createAuthCommand(
       console.log("Authenticated: Yes");
       console.log("Auth method: OAuth (JWT)");
       if (accessTokenExpired) {
-        console.log("Access token: expired (will refresh automatically)");
-      } else if (accessTokenExpiresAt) {
-        console.log(`Access token expires: ${accessTokenExpiresAt}`);
+        console.log("Note: access token expired — will refresh automatically.");
       }
       if (sessionExpiresAt) {
         console.log(`Session expires: ${sessionExpiresAt}`);
