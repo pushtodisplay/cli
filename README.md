@@ -4,6 +4,12 @@ Command-line interface and [MCP server](https://modelcontextprotocol.io) for [Pu
 
 ![Push to Display — 4-panel regional status board](https://raw.githubusercontent.com/pushtodisplay/cli/main/assets/display-4-panel-status.png)
 
+## Get the app
+
+Turn any screen into a live display board — get Push to Display on iOS and Android.
+
+[![Download on the App Store](https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg)](https://apps.apple.com/app/push-to-display/id6754677853) [![Get it on Google Play](https://raw.githubusercontent.com/pushtodisplay/cli/main/assets/google-play-badge.png)](https://play.google.com/store/apps/details?id=com.pushtodisplay)
+
 ## Install
 
 Run directly with `npx` (no install needed):
