@@ -300,7 +300,7 @@ npx pushtodisplay mcp
 
 ## API key authentication
 
-For CI/CD pipelines and scripts where interactive login isn't available, you can authenticate with an API key. Create one from the mobile app or the [web portal](https://pushtodisplay.com/admin). API keys start with `pt_`.
+For CI/CD pipelines and scripts where interactive login isn't available, you can authenticate with an API key. Create one from the mobile app or the [web portal](https://pushtodisplay.com). API keys start with `pt_`.
 
 ```bash
 # Via environment variable
