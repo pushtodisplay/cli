@@ -360,8 +360,8 @@ Using MCP tools in sequence:
 | Active streams   | 2              | 3             | 10              | 50                   |
 | Max message size | 4 KB           | 8 KB          | 32 KB           | 128 KB               |
 | Monthly messages | 1,000          | 50,000        | 200,000         | 1,000,000            |
-| Rate (msg/s)     | 1              | 1             | 1               | 2                    |
-| Burst            | 2              | 3             | 5               | 20                   |
+| Rate (msg/s)     | 2              | 2             | 2               | 4                    |
+| Burst (msgs)     | 4              | 6             | 10              | 40                   |
 
 Devices are unlimited across all tiers. A board is a named display destination — not a physical device.
 
