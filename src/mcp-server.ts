@@ -33,7 +33,7 @@ export async function startMcpServer(
   // --- pushtodisplay_send_update ---
   server.tool(
     "pushtodisplay_send_update",
-    "Send a display update to a PushToDisplay board. Publishes text content to all devices connected to the specified board.",
+    "Send a display update to a PushToDisplay board. Publishes text content to all devices connected to the specified board. Blocks are inline text runs of ONE message: they render in order on a single line (wrapping as needed), not as separate lines. To place content on separate lines, send separate messages.",
     {
       boardId: z
         .string()
@@ -44,7 +44,7 @@ export async function startMcpServer(
       blocks: z
         .array(
           z.object({
-            text: z.string().describe("Text content to display"),
+            text: z.string().describe("Text of this inline run"),
             size: z
               .enum(["small", "medium", "large"])
               .optional()
@@ -64,7 +64,9 @@ export async function startMcpServer(
           }),
         )
         .min(1)
-        .describe("Text blocks to display"),
+        .describe(
+          "Inline text runs, rendered in order on one line (like <span>, not <p>)",
+        ),
       panelId: z
         .number()
         .int()
@@ -72,11 +74,16 @@ export async function startMcpServer(
         .max(4)
         .optional()
         .describe("Panel ID (1-4)"),
-      fullPanel: z.boolean().optional().describe("Use full panel mode"),
+      fullPanel: z
+        .boolean()
+        .optional()
+        .describe(
+          "Enlarge this message to the whole board (only the newest message is shown)",
+        ),
       density: z
         .enum(["compact", "standard", "spacious"])
         .optional()
-        .describe("Line density"),
+        .describe("Line height used when the text wraps"),
       alignX: z
         .enum(["start", "center", "end"])
         .optional()

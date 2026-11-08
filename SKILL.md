@@ -80,10 +80,22 @@ The MCP server inherits the CLI session. Run `pushtodisplay auth login` once, an
 | ---------- | ---------------------------------------------------------------------------------- |
 | **Board**  | A named display destination. Not a physical device — any device can tune in        |
 | **Panel**  | A targetable region within a board (1–4 depending on layout)                       |
-| **Block**  | A text content entry in the `blocks` array. Each block can be styled independently |
+| **Block**  | An **inline** text run in the `blocks` array (like `<span>`, not `<p>`). Runs of one message flow onto one line in order; each can be styled independently |
 | **Layout** | A board-level preset that determines panel arrangement                             |
 | **Device** | A physical screen running the PushToDisplay app                                    |
 | **Stream** | An active connection between a device and a board                                  |
+
+### How text renders
+
+A message is **one line-wrapping paragraph**, not a stack of lines:
+
+- `blocks` are inline runs. `"Build:"` + `"passing"` renders as `Build: passing` on one line.
+- Each run can have its own `size`, `weight`, `color`, and `background`.
+- Runs wrap onto more lines only when they exceed the panel width. `density` controls the line height of that wrapping.
+- A message cannot be used to lay out columns, rows, or deliberate line breaks. Newlines inside one message are not a layout mechanism.
+- **Multiple lines = multiple messages.** Each send is its own entry in the panel's scrollable history.
+
+> In `--full-panel` mode blocks are currently stacked on separate lines; that legacy behaviour is being removed to match the inline model.
 
 ### Layouts
 
@@ -112,7 +124,7 @@ pushtodisplay send -b <board-id> "Build passed"
 # Styled text
 pushtodisplay send -b <board-id> "ALERT" --size large --weight bold --color "#FF0000"
 
-# Multiple text blocks (style flags apply to all blocks)
+# Multiple inline runs (style flags apply to all runs; they stay on ONE line)
 pushtodisplay send -b <board-id> "Build:" "passing" --color "#22C55E"
 
 # Panel targeting
@@ -121,7 +133,7 @@ pushtodisplay send -b <board-id> --panel 2 "Right panel content"
 # Full panel with layout options
 pushtodisplay send -b <board-id> --panel 1 --full-panel --density compact --align-x center "Status OK"
 
-# Per-block styling with JSON (repeatable)
+# Per-run styling with JSON (repeatable)
 pushtodisplay send -b <board-id> \
   --block '{"text": "API Health", "size": "large", "weight": "bold"}' \
   --block '{"text": "Uptime: 99.97%", "color": "#22C55E"}'
@@ -132,7 +144,7 @@ echo '{"boardId":"my-board","blocks":[{"text":"From pipe"}]}' | pushtodisplay se
 
 If no `-b` flag is provided, the server uses the user's default board.
 
-The three input modes — positional text arguments, `--block` JSON flags, and `--stdin` — are mutually exclusive. Do not combine them. When style flags are used with multiple positional text arguments, they apply to **all** generated blocks. For per-block styling, use `--block` JSON syntax instead.
+The three input modes — positional text arguments, `--block` JSON flags, and `--stdin` — are mutually exclusive. Do not combine them. When style flags are used with multiple positional text arguments, they apply to **all** generated runs (which still render on one line). For per-run styling, use `--block` JSON syntax instead.
 
 **Style flags:** `--size` (small/medium/large), `--weight` (regular/semibold/bold), `--color` (#RRGGBB), `--background` (#RRGGBB)
 
@@ -261,14 +273,14 @@ Returns array of `{ boardId, deviceId }`.
 
 ### Block-level styling
 
-Each block in the `blocks` array can have its own `size`, `weight`, `color`, and `background`. These apply only to that block.
+Each block in the `blocks` array can have its own `size`, `weight`, `color`, and `background`. These apply only to that run. Because runs are inline, mixing sizes inside one message is the normal way to emphasise a word inside a sentence.
 
 ### Top-level (entry-level) styling
 
 Top-level fields apply to the entire update entry for the target panel:
 
-- `fullPanel` — expand content to fill the panel area
-- `density` — line spacing (`compact` = tight, `standard` = normal, `spacious` = loose)
+- `fullPanel` — enlarge this message to the whole board area (only the newest message is shown)
+- `density` — line height used when the text wraps (`compact` = tight, `standard` = normal, `spacious` = loose); it does **not** space out messages
 - `alignX` / `alignY` — content alignment within the panel
 - `background` — background color for the entire entry
 

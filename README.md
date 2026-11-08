@@ -106,14 +106,14 @@ pushtodisplay send -b my-board-id "Deploy succeeded"
 # Styled text
 pushtodisplay send -b my-board-id "Status" --size large --weight bold --color "#00FF00"
 
-# Multiple blocks
+# Multiple inline runs — they stay on ONE line
 pushtodisplay send -b my-board-id "Build:" "passing" --color "#22C55E"
 
 # Panel targeting with layout options
 pushtodisplay send -b my-board-id --panel 2 "Right panel content"
 pushtodisplay send -b my-board-id --panel 1 --full-panel --density compact --align-x center "Alert"
 
-# Per-block styling with JSON (repeatable)
+# Per-run styling with JSON (repeatable)
 pushtodisplay send -b my-board-id \
   --block '{"text": "API Health", "size": "large", "weight": "bold"}' \
   --block '{"text": "Uptime: 99.97%", "color": "#22C55E"}'
@@ -123,6 +123,36 @@ echo '{"boardId":"my-board-id","blocks":[{"text":"From pipe"}]}' | pushtodisplay
 ```
 
 If no `-b` flag is provided, the server uses your default board.
+
+#### How text renders
+
+**Blocks are inline runs, not lines.** Think of `<span>`, not `<p>`. The blocks
+of one message flow onto a single line in order, and wrap like a paragraph when
+they run out of width:
+
+```bash
+pushtodisplay send -b my-board-id "Build:" "passing" --color "#22C55E"
+```
+
+renders as one line:
+
+```
+Build: passing
+```
+
+not as two lines. Each run keeps its own size, weight, colour, and background,
+so a message is one paragraph with styled runs inside it.
+
+**To put content on separate lines, send separate messages.** Every send is its
+own entry in the panel's scrollable history, so multiple lines are multiple
+messages. Newlines inside a single message are not a layout mechanism.
+
+`--density` sets the line height used *when that paragraph wraps* — it is not
+the spacing between messages.
+
+> **Note:** in `--full-panel` mode blocks are currently stacked on separate
+> lines. That legacy behaviour is being removed so full-panel matches the inline
+> model above.
 
 #### Style flags
 
@@ -138,8 +168,8 @@ If no `-b` flag is provided, the server uses your default board.
 | Flag           | Values                            | Description                |
 | -------------- | --------------------------------- | -------------------------- |
 | `-p, --panel`  | `1`–`4`                           | Target panel number        |
-| `--full-panel` | —                                 | Fill the entire panel area |
-| `--density`    | `compact`, `standard`, `spacious` | Content spacing            |
+| `--full-panel` | —                                 | Enlarge to the whole board |
+| `--density`    | `compact`, `standard`, `spacious` | Line height when text wraps |
 | `--align-x`    | `start`, `center`, `end`          | Horizontal alignment       |
 | `--align-y`    | `start`, `center`, `end`          | Vertical alignment         |
 
@@ -148,7 +178,7 @@ If no `-b` flag is provided, the server uses your default board.
 | Flag             | Description                       |
 | ---------------- | --------------------------------- |
 | `-b, --board`    | Board ID                          |
-| `--block <json>` | Styled block as JSON (repeatable) |
+| `--block <json>` | Inline styled run as JSON (repeatable) |
 | `--stdin`        | Read full JSON request from stdin |
 
 ### `boards`

@@ -7,25 +7,46 @@ export function createSendCommand(
   isJson: () => boolean,
 ): Command {
   const send = new Command("send")
-    .description("Send a display update to a board")
-    .argument("[text...]", "Text blocks to display")
+    .description("Send one text message to a board panel")
+    .argument("[text...]", "Inline text runs of the message (rendered in order on one line)")
     .option("-b, --board <boardId>", "Board ID")
     .option("-p, --panel <number>", "Panel ID (1-4)", parseInt)
-    .option("--full-panel", "Use full panel mode")
+    .option(
+      "--full-panel",
+      "Enlarge this message to the whole board (shows only the newest message)",
+    )
     .option("-s, --size <size>", "Text size: small, medium, large")
     .option("-w, --weight <weight>", "Font weight: regular, semibold, bold")
     .option("-c, --color <hex>", "Text color (hex, e.g. #FF0000)")
     .option("--background <hex>", "Background color (hex)")
-    .option("--density <density>", "Line density: compact, standard, spacious")
+    .option(
+      "--density <density>",
+      "Line height when the text wraps: compact, standard, spacious",
+    )
     .option("--align-x <align>", "Horizontal alignment: start, center, end")
     .option("--align-y <align>", "Vertical alignment: start, center, end")
     .option(
       "--block <json>",
-      "Styled block as JSON (repeatable)",
+      "Inline styled text run as JSON (repeatable)",
       collectBlock,
       [],
     )
     .option("--stdin", "Read JSON request from stdin")
+    .addHelpText(
+      "after",
+      `
+How text renders:
+  blocks are inline runs (like <span>), not lines (like <p>). They flow onto
+  one line in order and wrap like a paragraph. --size/--weight/--color style
+  a run; the flags apply to every run generated from positional arguments.
+
+  To put content on separate lines, send separate messages: each message is
+  its own entry in the panel history. Newlines inside one message are not a
+  layout mechanism.
+
+  --density sets the line height used when that paragraph wraps.
+`,
+    )
     .action(async (textArgs: string[], opts) => {
       try {
         let request: MessageRequest;
