@@ -42,7 +42,7 @@ concurrency:
 jobs:
   publish:
     name: Publish pushtodisplay
-    runs-on: [self-hosted, Linux, large]
+    runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
       contents: write
