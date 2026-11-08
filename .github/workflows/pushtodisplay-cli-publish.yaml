@@ -156,11 +156,3 @@ jobs:
           git commit -m "chore(cli): release v${{ steps.version.outputs.version }}"
           git tag "cli-v${{ steps.version.outputs.version }}"
           git push origin HEAD "cli-v${{ steps.version.outputs.version }}"
-
-      - name: Verify publish
-        if: ${{ inputs.dry_run == false }}
-        run: |
-          echo "Waiting for npm registry propagation..."
-          sleep 10
-          npm info pushtodisplay@${{ steps.version.outputs.version }} version
-          echo "pushtodisplay@${{ steps.version.outputs.version }} is live"
